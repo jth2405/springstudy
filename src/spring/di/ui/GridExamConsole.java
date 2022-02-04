@@ -1,13 +1,18 @@
 package spring.di.ui;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+
 import spring.di.entity.Exam;
 
 public class GridExamConsole implements ExamConsole {
 
+	@Autowired
+	@Qualifier("exam1")
 	private Exam exam;
 	
 	public GridExamConsole() {
-		// TODO Auto-generated constructor stub
+		System.out.println("construcotr");
 	}
 
 	public GridExamConsole(Exam exam) {
@@ -24,8 +29,7 @@ public class GridExamConsole implements ExamConsole {
 		System.out.println("戌式式式式式式式式式扛式式式式式式式式式戎");
 	}
 
-
-	@Override
+	
 	public void setExam(Exam exam) {
 		this.exam = exam;
 		
