@@ -9,21 +9,40 @@
 		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.3.xsd">
 	
 	
-	<bean id="target" class="spring.aop.entity.NewlecExam" p:kor="70" p:eng="101" p:com="10" p:math="60"/>
+	<bean id="target" class="spring.aop.entity.NewlecExam" p:kor="70" p:eng="100" p:com="10" p:math="60"/>
 	<bean id="logAroundAdvice" class="spring.aop.advice.LogAroundAdvice" />
 	<bean id="logBeforeAdvice" class="spring.aop.advice.LogBeforeAdvice" />
 	<bean id="logAfterReturningAdvice" class="spring.aop.advice.LogAfterReturningAdvice" />
 	<bean id="logAfterThrowingAdvice" class="spring.aop.advice.LogAfterThrowingAdvice" />
-	<bean id="proxy" class="org.springframework.aop.framework.ProxyFactoryBean">
+	
+	 <bean id="classicPointCut" class="org.springframework.aop.support.NameMatchMethodPointcut">
+		<property name="mappedName" value="total"/>
+	</bean>
+	
+	
+	
+	<bean id="classicBeforeAdvisor" class="org.springframework.aop.support.DefaultPointcutAdvisor">
+		<property name="advice" ref="logBeforeAdvice"/>
+		<property name="pointcut" ref="classicPointCut"/>
+	</bean>
+	
+	<bean id="classicAroubdAdvisor" class="org.springframework.aop.support.DefaultPointcutAdvisor">
+		<property name="advice" ref="logAroundAdvice"/>
+		<property name="pointcut" ref="classicPointCut"/>
+	</bean>
+	
+	<bean id="exam" class="org.springframework.aop.framework.ProxyFactoryBean">
 		<property name="target" ref="target"/>
 		<property name="interceptorNames">
 			<list>
-				<value>logAroundAdvice</value>
-				<value>logBeforeAdvice</value>
+				<value>classicAroubdAdvisor</value>
+				<value>classicBeforeAdvisor</value>
 				<value>logAfterReturningAdvice</value>
 				<value>logAfterThrowingAdvice</value>
 			</list>
 		</property>
 	</bean>
+	
+	
 	
 </beans>

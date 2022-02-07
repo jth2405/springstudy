@@ -1,14 +1,9 @@
 package spring.aop;
 
-import java.lang.reflect.InvocationHandler;
-import java.lang.reflect.Method;
-import java.lang.reflect.Proxy;
-
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import spring.aop.entity.Exam;
-import spring.aop.entity.NewlecExam;
 
 public class Program {
 	
@@ -18,10 +13,10 @@ public class Program {
 				//new AnnotationConfigApplicationContext(NewlecDIconfig.class);
 				new ClassPathXmlApplicationContext("spring/aop/setting.xml");
 		
-		Exam proxy=(Exam)context.getBean("proxy");
+		Exam exam=(Exam)context.getBean("exam");
 		
-		System.out.printf("total is %d\n", proxy.total());
-		System.out.printf("total is %f", proxy.avg());
+		System.out.printf("total is %d\n", exam.total());
+		System.out.printf("total is %f", exam.avg());
 		
 		
 		/*
