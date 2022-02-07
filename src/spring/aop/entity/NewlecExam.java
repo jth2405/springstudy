@@ -59,9 +59,12 @@ public class NewlecExam implements Exam {
 	}
 
 	public int total() {
-		//long start = System.currentTimeMillis();
+		
 		
 		int result= kor+eng+math+com;
+		
+		if((kor>100)|(math>100)|(eng>100)|(com>100))
+			throw new IllegalArgumentException("유효하지 않은 점수");
 		
 		try {
 			Thread.sleep(200);
